@@ -2,7 +2,6 @@
 # >>> Escriba el codigo del reducer a partir de este punto <<<
 #
 import os
-
 result = os.popen("cat data.csv | python3 mapper.py | sort | python3 reducer.py").read()
 
 lines = [line.strip().replace("\n", "") for line in result.split("\n")]
