@@ -20,5 +20,4 @@ if __name__ == '__main__':
             total2 = total1 / letra
         else:
             if curkey is not None:
-                sys.stdout.write("{}\t{}\t{}\n".format(curkey, total1, total2))
-            curkey = key
+                sys.stdout.write("{}\t{}\t{}\n".format(curkey, total1, total2)
