@@ -2,7 +2,6 @@
 # >>> Escriba el codigo del reducer a partir de este punto <<<
 #
 from itertools import count
-import numpy
 import sys
 if __name__ == '__main__':
     curkey = None
