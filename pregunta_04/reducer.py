@@ -1,22 +1,43 @@
 #
 # >>> Escriba el codigo del reducer a partir de este punto <<<
 #
-import os
-result = os.popen("cat data.csv | python3 mapper.py | sort | python3 reducer.py").read()
+import sys
 
-lines = [line.strip().replace("\n", "") for line in result.split("\n")]
+#
+# Esta funcion reduce los elementos que tienen la misma clave
+#
+if __name__ == '__main__':
 
-expected = """A,12
-B,10
-C,4
-D,1
-E,13
-""".split(
-    "\n"
-)
+    curkey = None
+    total = 0
 
-if len(lines) != len(expected):
-    raise Exception("Wrong number of lines")
+    #
+    # cada linea de texto recibida es una entrada clave \tabulador valor
+    #
+    for line in sys.stdin:
 
-for solution, expected in zip(lines, expected):
-    assert solution == expected, f"Expected: {expected}\nGot: {solution}"
+        key, val = line.split("\t")
+        val = int(val)
+
+        if key == curkey:
+            #
+            # No se ha cambiado de clave. Aca se acumulan los valores para la misma
+            # clave.
+            #
+            total += val
+        else:
+            #
+            # Se cambio de clave. Se reinicia el acumulador.
+            #
+            if curkey is not None:
+                #
+                # una vez se han reducido todos los elementos
+                # con la misma clave se imprime el resultado en
+                # el flujo de salida
+                #
+                sys.stdout.write("{},{}\n".format(curkey, total))
+
+            curkey = key
+            total = val
+
+    sys.stdout.write("{},{}\n".format(curkey, total))
