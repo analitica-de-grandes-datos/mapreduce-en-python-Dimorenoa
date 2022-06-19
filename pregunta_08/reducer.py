@@ -1,7 +1,6 @@
 #
 # >>> Escriba el codigo del reducer a partir de este punto <<<
 #
-from itertools import count
 import sys
 if __name__ == '__main__':
     curkey = None
@@ -19,4 +18,9 @@ if __name__ == '__main__':
             total2 = total1 / letra
         else:
             if curkey is not None:
-                sys.stdout.write("{}\t{}\t{}\n".format(curkey, total1, total2)
+                sys.stdout.write("{}\t{}\t{}\n".format(curkey, total1, total2))
+            curkey = key
+            letra = 1
+            total1 = val
+            total2 = total1 / letra
+    sys.stdout.write("{}\t{}\t{}\n".format(curkey, total1 , total2))
